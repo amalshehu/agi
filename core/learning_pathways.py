@@ -6,13 +6,13 @@ from typing import Dict, List, Any, Optional, Tuple
 from dataclasses import dataclass
 from datetime import datetime
 import uuid
-from memory_systems import (
+from .memory_systems import (
     MemoryContent, SensoryMemory, PerceptualAssociativeMemory, 
     SpatialMemory, TransientEpisodicMemory, DeclarativeMemory, 
     ProceduralMemory, SensoryMotorMemory
 )
-from consciousness import ConsciousContent, GlobalWorkspace
-from motor_systems import MotorPlan
+from .consciousness import ConsciousContent, GlobalWorkspace
+from .motor_systems import MotorPlan
 
 
 @dataclass

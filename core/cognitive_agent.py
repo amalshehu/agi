@@ -14,17 +14,17 @@ from langgraph.graph.message import add_messages
 from langchain_core.messages import BaseMessage, HumanMessage, AIMessage
 
 # Import our cognitive architecture components
-from memory_systems import (
+from .memory_systems import (
     SensoryMemory, PerceptualAssociativeMemory, SpatialMemory,
     TransientEpisodicMemory, DeclarativeMemory, ProceduralMemory,
     SensoryMotorMemory, SensoryStimulus, MemoryContent
 )
-from consciousness import (
+from .consciousness import (
     GlobalWorkspace, CurrentSituationalModel, StructureBuildingCodelet,
     AttentionCodelet, Coalition, ConsciousContent
 )
-from motor_systems import ActionSelection, MotorPlanExecution, Scheme, Action, ActionType
-from learning_pathways import LearningCoordinator
+from .motor_systems import ActionSelection, MotorPlanExecution, Scheme, Action, ActionType
+from .learning_pathways import LearningCoordinator
 
 
 class AgentState(TypedDict):

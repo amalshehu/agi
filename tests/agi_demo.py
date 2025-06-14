@@ -5,7 +5,11 @@ Comprehensive AGI Demo - Train and Test the Next-Generation AGI
 import asyncio
 import torch
 import numpy as np
-from hybrid_agi import HybridAGI
+import sys
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+
+from core.hybrid_agi import HybridAGI
 
 
 async def comprehensive_agi_demo():

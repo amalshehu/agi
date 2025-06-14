@@ -4,7 +4,11 @@ Test script to demonstrate the cognitive agent prototype
 
 import asyncio
 import json
-from cognitive_agent import CognitiveAgent, run_cognitive_agent
+import sys
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+
+from core.cognitive_agent import CognitiveAgent
 
 
 async def test_basic_functionality():

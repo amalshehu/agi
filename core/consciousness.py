@@ -9,7 +9,7 @@ from datetime import datetime
 import uuid
 from enum import Enum
 import heapq
-from memory_systems import MemoryContent
+from .memory_systems import MemoryContent
 
 
 class CoalitionType(Enum):

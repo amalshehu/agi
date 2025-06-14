@@ -8,8 +8,8 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from enum import Enum
 import uuid
-from memory_systems import MemoryContent
-from consciousness import ConsciousContent
+from .memory_systems import MemoryContent
+from .consciousness import ConsciousContent
 
 
 class ActionType(Enum):

@@ -17,9 +17,9 @@ import pickle
 from pathlib import Path
 
 # Import our cognitive architecture base
-from cognitive_agent import CognitiveAgent
-from consciousness import ConsciousContent, Coalition
-from memory_systems import MemoryContent
+from .cognitive_agent import CognitiveAgent
+from .consciousness import ConsciousContent, Coalition
+from .memory_systems import MemoryContent
 
 
 class NeuralPatternRecognizer(nn.Module):
