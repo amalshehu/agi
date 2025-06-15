@@ -738,7 +738,7 @@ class AGISurvivorOrchestrator:
             "Consciousness levels correlate with decision sophistication"
         ]
         
-        results = self.agi.train(survival_data, epochs=3)
+        results = self.agi.train(survival_data, epochs=100)
         print(f"   🎓 AGI training complete: {results['final_performance']:.3f}")
     
     def _display_final_results(self, final_state: Dict[str, Any]):

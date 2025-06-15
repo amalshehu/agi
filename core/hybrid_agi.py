@@ -455,7 +455,11 @@ class HybridAGI:
         
         # Compute losses
         pattern_loss = nn.CrossEntropyLoss()(pattern_logits, target_patterns)
-        value_loss = nn.MSELoss()(value.squeeze(), target_value)
+        # Fix tensor shape mismatch
+        value_squeezed = value.squeeze()
+        if value_squeezed.dim() == 0:  # If scalar tensor
+            value_squeezed = value_squeezed.unsqueeze(0)  # Make it [1]
+        value_loss = nn.MSELoss()(value_squeezed, target_value)
         
         # Causal model loss
         current_state = neural_encoding
