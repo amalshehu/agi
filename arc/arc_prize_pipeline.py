@@ -11,6 +11,7 @@ if ROOT not in sys.path:
 
 from core.cognitive_agent import CognitiveAgent
 from arc_prize_solvers import solve_identity, solve_uniform_mapping, solve_non_uniform, solve_non_uniform_improved
+from advanced_arc_solver import solve_with_advanced_methods
 
 DATA_DIR = 'arc-prize-2025'
 
@@ -163,9 +164,15 @@ def main():
         elif cat.startswith('uniform'):
             pred = solve_uniform_mapping(ch, sol_map_tr[pid])
         else:
-            # Use improved solver with debug for first few examples
+            # Use advanced solver for non-uniform puzzles
             debug_enabled = (cat == 'non-uniform' and debug_count < 3)
-            pred = solve_non_uniform_improved(ch, sol_map_tr[pid], debug=debug_enabled)
+            try:
+                pred = solve_with_advanced_methods(ch, sol_map_tr[pid], debug=debug_enabled)
+            except Exception as e:
+                if debug_enabled:
+                    print(f"  Advanced solver failed for {pid}: {e}, falling back to improved solver")
+                pred = solve_non_uniform_improved(ch, sol_map_tr[pid], debug=debug_enabled)
+            
             if debug_enabled:
                 debug_count += 1
                 print(f"  Sample puzzle {pid}: prediction shape {pred.shape}, target shape {tgt.shape}")
