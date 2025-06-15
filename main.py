@@ -91,12 +91,11 @@ async def run_survivor_scenario():
     print("🧠 AGI SURVIVOR SCENARIO")
     print("=" * 50)
     
-    # Import and run the survivor demo
-    sys.path.append(str(Path(__file__).parent / "tests"))
-    from agi_survivor_demo import AGISurvivorDemo
+    # Import and run the advanced survivor demo with core AGI
+    sys.path.append(str(Path(__file__).parent / "survivor"))
+    from demo import main as survivor_main
     
-    demo = AGISurvivorDemo()
-    await demo.run_demo()
+    await survivor_main()
 
 
 async def run_breakthrough_proof():
