@@ -86,6 +86,19 @@ async def run_hybrid_agi_demo():
     print(f"   Self-modifications: {summary['modifications_made']}")
 
 
+async def run_survivor_scenario():
+    """Run the AGI survivor scenario demonstration"""
+    print("🧠 AGI SURVIVOR SCENARIO")
+    print("=" * 50)
+    
+    # Import and run the survivor demo
+    sys.path.append(str(Path(__file__).parent / "tests"))
+    from agi_survivor_demo import AGISurvivorDemo
+    
+    demo = AGISurvivorDemo()
+    await demo.run_demo()
+
+
 async def run_breakthrough_proof():
     """Run the breakthrough proof demonstration"""
     print("🌟 BREAKTHROUGH PROOF")
@@ -111,7 +124,7 @@ async def run_breakthrough_proof():
 def main():
     """Main entry point with command line interface"""
     parser = argparse.ArgumentParser(description="Next-Generation AGI System")
-    parser.add_argument("mode", choices=["cognitive", "hybrid", "proof", "all"],
+    parser.add_argument("mode", choices=["cognitive", "hybrid", "survivor", "proof", "all"],
                        help="Demonstration mode to run")
     parser.add_argument("--verbose", "-v", action="store_true",
                        help="Enable verbose output")
@@ -128,12 +141,16 @@ def main():
             await run_cognitive_demo()
         elif args.mode == "hybrid":
             await run_hybrid_agi_demo()
+        elif args.mode == "survivor":
+            await run_survivor_scenario()
         elif args.mode == "proof":
             await run_breakthrough_proof()
         elif args.mode == "all":
             await run_cognitive_demo()
             print("\n" + "="*60 + "\n")
             await run_hybrid_agi_demo()
+            print("\n" + "="*60 + "\n")
+            await run_survivor_scenario()
             print("\n" + "="*60 + "\n")
             await run_breakthrough_proof()
     
