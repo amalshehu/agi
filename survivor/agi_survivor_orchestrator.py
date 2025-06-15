@@ -495,7 +495,7 @@ class AGISurvivorOrchestrator:
   💾 Persistent memory and state management
   🔄 Real-time adaptive workflow orchestration
 
-{Colors.OKGREEN}SURVIVAL OBJECTIVE:{Colors.ENDC} Demonstrate breakthrough AGI capabilities
+{Colors.OKGREEN}SURVIVAL OBJECTIVE:{Colors.ENDC} Demonstrate advanced AGI capabilities
         """
         print(title)
 

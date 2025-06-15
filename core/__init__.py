@@ -1,8 +1,8 @@
 """
-Breakthrough AGI Core Components
+AGI Core Components
 ==================================
 
-This module contains the core implementation of our breakthrough hybrid AGI architecture.
+This module contains the core implementation of our hybrid AGI architecture.
 """
 
 from .memory_systems import *

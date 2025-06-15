@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-Breakthrough AGI - Main Entry Point
-===================================
+AGI System - Main Entry Point
+=============================
 
-This is the main entry point for running the breakthrough AGI system.
+This is the main entry point for running the AGI system.
 """
 
 import asyncio
@@ -121,7 +121,7 @@ async def run_breakthrough_proof():
 
 def main():
     """Main entry point with command line interface"""
-    parser = argparse.ArgumentParser(description="Breakthrough AGI System")
+    parser = argparse.ArgumentParser(description="AGI System")
     parser.add_argument("mode", choices=["cognitive", "hybrid", "survivor", "proof", "all"],
                        help="Demonstration mode to run")
     parser.add_argument("--verbose", "-v", action="store_true",
@@ -129,9 +129,9 @@ def main():
     
     args = parser.parse_args()
     
-    print("🌟 BREAKTHROUGH AGI SYSTEM")
+    print("🌟 AGI SYSTEM")
     print("=" * 60)
-    print("Breakthrough hybrid symbolic-neural-causal architecture")
+    print("Hybrid symbolic-neural-causal architecture")
     print()
     
     async def run_mode():
