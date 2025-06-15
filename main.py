@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Next-Generation AGI - Main Entry Point
-=====================================
+Breakthrough AGI - Main Entry Point
+===================================
 
 This is the main entry point for running the breakthrough AGI system.
 """
@@ -121,7 +121,7 @@ async def run_breakthrough_proof():
 
 def main():
     """Main entry point with command line interface"""
-    parser = argparse.ArgumentParser(description="Next-Generation AGI System")
+    parser = argparse.ArgumentParser(description="Breakthrough AGI System")
     parser.add_argument("mode", choices=["cognitive", "hybrid", "survivor", "proof", "all"],
                        help="Demonstration mode to run")
     parser.add_argument("--verbose", "-v", action="store_true",
@@ -129,7 +129,7 @@ def main():
     
     args = parser.parse_args()
     
-    print("🌟 NEXT-GENERATION AGI SYSTEM")
+    print("🌟 BREAKTHROUGH AGI SYSTEM")
     print("=" * 60)
     print("Breakthrough hybrid symbolic-neural-causal architecture")
     print()
