@@ -497,11 +497,12 @@ class SurvivalAGI:
                 return self.action_mapping.get(action_idx, {"type": "wait"})
             else:
                 # Random exploration
-                direction = np.random.choice([
+                directions = [
                     (-1, -1), (-1, 0), (-1, 1),
                     (0, -1), (0, 1),
                     (1, -1), (1, 0), (1, 1)
-                ])
+                ]
+                direction = directions[np.random.randint(len(directions))]
                 return {"type": "move", "direction": direction}
         
         elif action_type == "survival_status":
