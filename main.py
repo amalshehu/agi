@@ -87,14 +87,14 @@ async def run_hybrid_agi_demo():
 
 
 async def run_survivor_scenario():
-    """Run the AGI survivor scenario demonstration using LangGraph"""
-    print("🧠 AGI SURVIVOR SCENARIO - LANGGRAPH VERSION")
+    """Run the AGI survivor scenario demonstration"""
+    print("🧠 AGI SURVIVOR SCENARIO")
     print("=" * 50)
     
-    # Import and run the LangGraph demo
+    # Import and run the AGI survivor demo
     sys.path.append(str(Path(__file__).parent / "survivor"))
-    from modern_langraph_survivor import main as modern_main
-    await modern_main()
+    from agi_survivor_orchestrator import main as survivor_main
+    await survivor_main()
 
 
 async def run_breakthrough_proof():

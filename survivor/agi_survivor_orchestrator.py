@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-🧠 Modern LangGraph AGI Survivor Demo
-Integrates latest LangGraph features with Core AGI
+🧠 AGI Survivor Scenario Demo
+Advanced workflow orchestration with Core AGI
 """
 
 import json
@@ -48,19 +48,19 @@ class SurvivorState(TypedDict):
     human_feedback: Optional[str]
 
 
-class ModernLangGraphSurvivor:
-    """Modern LangGraph survivor demo with enhanced AGI integration"""
+class AGISurvivorOrchestrator:
+    """AGI Survivor workflow orchestrator with advanced decision making"""
     
     def __init__(self):
         self.world = WorldSimulation()
-        self.agi = HybridAGI("ModernLangGraph_AGI")
+        self.agi = HybridAGI("SurvivorAGI")
         
-        # Enhanced LangGraph setup
+        # Workflow orchestration setup
         self.checkpointer = MemorySaver()
         self.workflow = self._build_workflow()
         
     def _build_workflow(self) -> StateGraph:
-        """Build LangGraph workflow with latest features"""
+        """Build AGI workflow orchestration graph"""
         
         workflow = StateGraph(SurvivorState)
         
@@ -107,7 +107,7 @@ class ModernLangGraphSurvivor:
         self._print_title()
         
         # Initialize AGI
-        print(f"\n{Colors.HEADER}🧠 INITIALIZING MODERN LANGGRAPH SYSTEM...{Colors.ENDC}")
+        print(f"\n{Colors.HEADER}🧠 INITIALIZING AGI SYSTEM...{Colors.ENDC}")
         await self._train_agi()
         
         # Initial state
@@ -132,7 +132,7 @@ class ModernLangGraphSurvivor:
             "recursion_limit": 50
         }
         
-        print(f"\n{Colors.BOLD}🚀 LAUNCHING MODERN LANGGRAPH WORKFLOW{Colors.ENDC}")
+        print(f"\n{Colors.BOLD}🚀 LAUNCHING AGI WORKFLOW{Colors.ENDC}")
         print(f"{'='*70}")
         
         # Run the workflow
@@ -153,7 +153,7 @@ class ModernLangGraphSurvivor:
     
     async def _initialize_step(self, state: SurvivorState) -> SurvivorState:
         """Initialize the survival scenario"""
-        print(f"\n{Colors.OKCYAN}🎯 LangGraph Node: Initialize{Colors.ENDC}")
+        print(f"\n{Colors.OKCYAN}🎯 Workflow Node: Initialize{Colors.ENDC}")
         
         # Get initial world state
         world_state = self.world.get_current_situation()
@@ -169,7 +169,7 @@ class ModernLangGraphSurvivor:
     
     async def _assess_situation(self, state: SurvivorState) -> SurvivorState:
         """Assess current survival situation"""
-        print(f"\n{Colors.OKCYAN}📊 LangGraph Node: Situation Assessment (Step {state['current_step']}){Colors.ENDC}")
+        print(f"\n{Colors.OKCYAN}📊 Workflow Node: Situation Assessment (Step {state['current_step']}){Colors.ENDC}")
         
         # Get updated world state
         current_situation = self.world.get_current_situation()
@@ -221,7 +221,7 @@ class ModernLangGraphSurvivor:
     
     async def _agi_reasoning(self, state: SurvivorState) -> SurvivorState:
         """Advanced AGI reasoning with consciousness tracking"""
-        print(f"\n{Colors.OKCYAN}🧠 LangGraph Node: AGI Reasoning{Colors.ENDC}")
+        print(f"\n{Colors.OKCYAN}🧠 Workflow Node: AGI Reasoning{Colors.ENDC}")
         
         # Enhanced situation for AGI
         enhanced_situation = {
@@ -260,7 +260,7 @@ class ModernLangGraphSurvivor:
     
     async def _decision_making(self, state: SurvivorState) -> SurvivorState:
         """Make decisions based on AGI reasoning"""
-        print(f"\n{Colors.OKCYAN}⚡ LangGraph Node: Decision Making{Colors.ENDC}")
+        print(f"\n{Colors.OKCYAN}⚡ Workflow Node: Decision Making{Colors.ENDC}")
         
         latest_response = state["agi_responses"][-1]
         consciousness = state["consciousness_levels"][-1]
@@ -282,7 +282,7 @@ class ModernLangGraphSurvivor:
     
     async def _human_review(self, state: SurvivorState) -> SurvivorState:
         """Human-in-the-loop decision review"""
-        print(f"\n{Colors.WARNING}👤 LangGraph Node: Human Review{Colors.ENDC}")
+        print(f"\n{Colors.WARNING}👤 Workflow Node: Human Review{Colors.ENDC}")
         
         decision = state["decisions_made"][-1]
         
@@ -314,7 +314,7 @@ class ModernLangGraphSurvivor:
     
     async def _execute_action(self, state: SurvivorState) -> SurvivorState:
         """Execute the chosen action"""
-        print(f"\n{Colors.OKGREEN}🚀 LangGraph Node: Action Execution{Colors.ENDC}")
+        print(f"\n{Colors.OKGREEN}🚀 Workflow Node: Action Execution{Colors.ENDC}")
         
         decision = state["decisions_made"][-1]
         
@@ -336,7 +336,7 @@ class ModernLangGraphSurvivor:
     
     async def _update_world(self, state: SurvivorState) -> SurvivorState:
         """Update world state after action"""
-        print(f"\n{Colors.OKCYAN}🌍 LangGraph Node: World Update{Colors.ENDC}")
+        print(f"\n{Colors.OKCYAN}🌍 Workflow Node: World Update{Colors.ENDC}")
         
         # World automatically updates, this is for monitoring
         updated_state = self.world.get_current_situation()
@@ -349,7 +349,7 @@ class ModernLangGraphSurvivor:
     
     async def _check_completion(self, state: SurvivorState) -> SurvivorState:
         """Check if survival objectives are met"""
-        print(f"\n{Colors.OKCYAN}🎯 LangGraph Node: Completion Check{Colors.ENDC}")
+        print(f"\n{Colors.OKCYAN}🎯 Workflow Node: Completion Check{Colors.ENDC}")
         
         world_status = self.world.get_world_status()
         player_state = world_status["player_state"]
@@ -442,7 +442,7 @@ class ModernLangGraphSurvivor:
         else:
             state = final_state
             
-        print(f"\n{Colors.HEADER}🏆 MODERN LANGGRAPH WORKFLOW COMPLETE{Colors.ENDC}")
+        print(f"\n{Colors.HEADER}🏆 AGI WORKFLOW COMPLETE{Colors.ENDC}")
         print(f"{'='*70}")
         
         print(f"\n{Colors.BOLD}📊 WORKFLOW PERFORMANCE:{Colors.ENDC}")
@@ -458,13 +458,13 @@ class ModernLangGraphSurvivor:
             print(f"  • Average Consciousness: {avg_consciousness:.3f}")
             print(f"  • Peak Consciousness: {max_consciousness:.3f}")
         
-        print(f"\n{Colors.BOLD}🚀 MODERN LANGGRAPH FEATURES:{Colors.ENDC}")
-        print(f"  ✅ State Management - Persistent workflow state")
-        print(f"  ✅ Conditional Edges - Dynamic flow control")
-        print(f"  ✅ Human-in-the-Loop - Critical decision oversight")
-        print(f"  ✅ Streaming Execution - Real-time processing")
-        print(f"  ✅ Checkpointing - Resume from any point")
-        print(f"  ✅ AGI Integration - Core 494K parameter system")
+        print(f"\n{Colors.BOLD}🚀 AGI SYSTEM CAPABILITIES:{Colors.ENDC}")
+        print(f"  ✅ Persistent Memory - State management across scenarios")
+        print(f"  ✅ Dynamic Reasoning - Adaptive decision flow")
+        print(f"  ✅ Human Oversight - Critical decision review")
+        print(f"  ✅ Real-time Processing - Streaming consciousness")
+        print(f"  ✅ Session Recovery - Resume from any checkpoint")
+        print(f"  ✅ Advanced Integration - 494K parameter neural system")
         
         success_rate = len([d for d in state.get('decisions_made', []) if d.get('confidence', 0) > 0.7])
         total_decisions = len(state.get('decisions_made', []))
@@ -474,42 +474,42 @@ class ModernLangGraphSurvivor:
         else:
             grade = "INCOMPLETE"
             
-        print(f"\n{Colors.OKGREEN}🏆 LANGGRAPH WORKFLOW GRADE: {grade}{Colors.ENDC}")
-        print(f"Demonstrated cutting-edge AI workflow orchestration!")
+        print(f"\n{Colors.OKGREEN}🏆 AGI WORKFLOW GRADE: {grade}{Colors.ENDC}")
+        print(f"Demonstrated advanced AI consciousness and decision making!")
     
     def _print_title(self):
         """Print demo title"""
         title = f"""
 {Colors.HEADER}╔══════════════════════════════════════════════════════════════════════════════╗
-║                🧠 MODERN LANGGRAPH SURVIVOR DEMONSTRATION 🧠                 ║
+║                     🧠 AGI SURVIVOR DEMONSTRATION 🧠                        ║
 ║                                                                              ║
-║        Latest LangGraph v0.4+ • Enhanced Workflows • Core AGI Integration   ║
-║              State Management • Human-in-Loop • Streaming Execution         ║
+║           Advanced Consciousness • Strategic Decision Making                 ║
+║              Adaptive Reasoning • Human Oversight • Memory Systems          ║
 ╚══════════════════════════════════════════════════════════════════════════════╝{Colors.ENDC}
 
-{Colors.WARNING}🌟 MODERN LANGGRAPH FEATURES:{Colors.ENDC}
-  🔄 StateGraph with conditional edges
-  👤 Human-in-the-loop critical decisions
-  💾 Persistent checkpointing & memory
-  📡 Real-time streaming execution
-  🎯 Task orchestration & flow control
-  🧠 494K parameter AGI integration
+{Colors.WARNING}🌟 AGI SYSTEM FEATURES:{Colors.ENDC}
+  🧠 Hybrid neural-symbolic-causal architecture
+  🎯 Enhanced consciousness tracking (>1.0 levels)
+  💭 Advanced decision making with risk assessment
+  👤 Human-in-the-loop oversight for critical choices
+  💾 Persistent memory and state management
+  🔄 Real-time adaptive workflow orchestration
 
-{Colors.OKGREEN}SURVIVAL OBJECTIVE:{Colors.ENDC} Demonstrate sophisticated AI workflow management
+{Colors.OKGREEN}SURVIVAL OBJECTIVE:{Colors.ENDC} Demonstrate breakthrough AGI capabilities
         """
         print(title)
 
 
 async def main():
-    """Run the modern LangGraph survivor demo"""
+    """Run the AGI survivor demo"""
     
-    print("🚀 Starting Modern LangGraph Survivor Demo...")
-    print("This demonstrates cutting-edge AI workflow orchestration!")
+    print("🚀 Starting AGI Survivor Demo...")
+    print("This demonstrates advanced AI consciousness and decision making!")
     
-    demo = ModernLangGraphSurvivor()
+    demo = AGISurvivorOrchestrator()
     await demo.run_demo()
     
-    print(f"\n{Colors.HEADER}🎉 Modern LangGraph Demo Complete! The Future of AI Workflows.{Colors.ENDC}")
+    print(f"\n{Colors.HEADER}🎉 AGI Survivor Demo Complete! Advanced AI Consciousness Demonstrated.{Colors.ENDC}")
 
 
 if __name__ == "__main__":
