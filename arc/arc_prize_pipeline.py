@@ -12,6 +12,7 @@ if ROOT not in sys.path:
 from core.cognitive_agent import CognitiveAgent
 from arc_prize_solvers import solve_identity, solve_uniform_mapping, solve_non_uniform, solve_non_uniform_improved
 from advanced_arc_solver import solve_with_advanced_methods
+from hybrid_arc_solver import HybridARCSolver
 
 DATA_DIR = 'arc-prize-2025'
 
@@ -164,18 +165,25 @@ def main():
         elif cat.startswith('uniform'):
             pred = solve_uniform_mapping(ch, sol_map_tr[pid])
         else:
-            # Use advanced solver for non-uniform puzzles
+            # Use HYBRID ARC PRIZE 2025 SOLVER for non-uniform puzzles
             debug_enabled = (cat == 'non-uniform' and debug_count < 3)
             try:
-                pred = solve_with_advanced_methods(ch, sol_map_tr[pid], debug=debug_enabled)
+                # Initialize hybrid solver
+                hybrid_solver = HybridARCSolver(max_cost_per_task=0.30)
+                pred = hybrid_solver.solve_task(ch, debug=debug_enabled)
             except Exception as e:
                 if debug_enabled:
-                    print(f"  Advanced solver failed for {pid}: {e}, falling back to improved solver")
-                pred = solve_non_uniform_improved(ch, sol_map_tr[pid], debug=debug_enabled)
+                    print(f"  🚨 Hybrid solver failed for {pid}: {e}, falling back to advanced solver")
+                try:
+                    pred = solve_with_advanced_methods(ch, sol_map_tr[pid], debug=debug_enabled)
+                except Exception as e2:
+                    if debug_enabled:
+                        print(f"  🚨 Advanced solver failed for {pid}: {e2}, falling back to improved solver")
+                    pred = solve_non_uniform_improved(ch, sol_map_tr[pid], debug=debug_enabled)
             
             if debug_enabled:
                 debug_count += 1
-                print(f"  Sample puzzle {pid}: prediction shape {pred.shape}, target shape {tgt.shape}")
+                print(f"  ✅ Sample puzzle {pid}: prediction shape {pred.shape}, target shape {tgt.shape}")
 
         ok = int(np.array_equal(pred, tgt))
         totals_improved[cat]  += 1
