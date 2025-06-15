@@ -40,7 +40,7 @@ async def run_cognitive_demo():
         
         # Show agent status
         status = agent.get_agent_status()
-        print(f"Memory items: {sum(m.get('current_items', 0) for m in status['memory_stats'].values())}")
+        print(f"Memory items: {sum(status['memory_stats'].values())}")
         print(f"Consciousness: {status['consciousness_stats']}")
 
 
@@ -97,9 +97,9 @@ async def run_survivor_scenario():
     await survivor_main()
 
 
-async def run_breakthrough_proof():
-    """Run the breakthrough proof demonstration"""
-    print("🌟 BREAKTHROUGH PROOF")
+async def run_validation_proof():
+    """Run the validation proof demonstration"""
+    print("🌟 VALIDATION PROOF")
     print("=" * 50)
     
     # Import and run the proof
@@ -108,12 +108,12 @@ async def run_breakthrough_proof():
     
     results, agi = await run_comprehensive_proof()
     
-    if results['breakthrough_confirmed']:
-        print(f"\n✅ BREAKTHROUGH CONFIRMED!")
+    if results.get('validation_confirmed', results.get('breakthrough_confirmed', False)):
+        print(f"\n✅ VALIDATION CONFIRMED!")
         print(f"   Proof strength: {results['proof_strength']:.1%}")
         print(f"   Unique capabilities: {results['evidence_categories']['unique_advantages']}")
     else:
-        print(f"\n⚠️ PARTIAL BREAKTHROUGH")
+        print(f"\n⚠️ PARTIAL VALIDATION")
         print(f"   Proof strength: {results['proof_strength']:.1%}")
     
     return results
@@ -160,7 +160,7 @@ def main():
         elif args.mode == "survivor":
             await run_survivor_scenario()
         elif args.mode == "proof":
-            await run_breakthrough_proof()
+            await run_validation_proof()
         elif args.mode == "survival":
             await run_survival_research()
         elif args.mode == "all":
@@ -170,7 +170,7 @@ def main():
             print("\n" + "="*60 + "\n")
             await run_survivor_scenario()
             print("\n" + "="*60 + "\n")
-            await run_breakthrough_proof()
+            await run_validation_proof()
             print("\n" + "="*60 + "\n")
             await run_survival_research()
     
