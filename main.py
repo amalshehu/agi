@@ -119,10 +119,28 @@ async def run_breakthrough_proof():
     return results
 
 
+async def run_survival_research():
+    """Run the survival research demonstration"""
+    print("🏃 SURVIVAL RESEARCH")
+    print("=" * 50)
+    
+    # Import and run the survival research demo
+    from survival_research_demo import SurvivalResearchDemo
+    
+    demo = SurvivalResearchDemo()
+    results = await demo.run_full_research_demo()
+    
+    print(f"\n✅ SURVIVAL RESEARCH COMPLETED!")
+    print(f"   Episodes run: {results['episodes_run']}")
+    print(f"   Consciousness events: {results['consciousness_events']}")
+    
+    return results
+
+
 def main():
     """Main entry point with command line interface"""
     parser = argparse.ArgumentParser(description="AGI System")
-    parser.add_argument("mode", choices=["cognitive", "hybrid", "survivor", "proof", "all"],
+    parser.add_argument("mode", choices=["cognitive", "hybrid", "survivor", "proof", "survival", "all"],
                        help="Demonstration mode to run")
     parser.add_argument("--verbose", "-v", action="store_true",
                        help="Enable verbose output")
@@ -143,6 +161,8 @@ def main():
             await run_survivor_scenario()
         elif args.mode == "proof":
             await run_breakthrough_proof()
+        elif args.mode == "survival":
+            await run_survival_research()
         elif args.mode == "all":
             await run_cognitive_demo()
             print("\n" + "="*60 + "\n")
@@ -151,6 +171,8 @@ def main():
             await run_survivor_scenario()
             print("\n" + "="*60 + "\n")
             await run_breakthrough_proof()
+            print("\n" + "="*60 + "\n")
+            await run_survival_research()
     
     try:
         asyncio.run(run_mode())
