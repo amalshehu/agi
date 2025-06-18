@@ -879,6 +879,7 @@ class UltimateARCSolver:
                     return result
         
         # STAGE 2: Fast hypothesis generation and execution
+        print("🧠 Generating advanced hypotheses...")
         hypotheses = self.hypothesis_generator.generate_hypotheses(
             train_examples, cost_tracker, max_hypotheses=3
         )
