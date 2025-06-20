@@ -15,8 +15,6 @@ from pathlib import Path
 import pickle
 
 # Import AGI and data components
-import sys
-sys.path.append(str(Path(__file__).parent.parent))
 
 from core.hybrid_agi import HybridAGI
 from core.cognitive_agent import CognitiveAgent
