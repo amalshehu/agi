@@ -4,9 +4,6 @@ import sys
 import os
 import numpy as np
 
-# Add arc directory to path
-sys.path.append('arc')
-
 # Import the enhanced solver
 from arc_prize_pipeline import NeuroSymbolicARCSolver, TENSORFLOW_AVAILABLE
 

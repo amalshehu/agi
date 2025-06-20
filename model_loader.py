@@ -10,8 +10,6 @@ import json
 import glob
 
 # Import AGI components
-import sys
-sys.path.append(str(Path(__file__).parent.parent))
 
 from core.hybrid_agi import HybridAGI
 

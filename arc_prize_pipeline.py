@@ -4,11 +4,6 @@ import os, sys, json, zipfile, asyncio
 from collections import Counter
 import numpy as np
 
-# Ensure core/ is importable
-ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-if ROOT not in sys.path:
-    sys.path.insert(0, ROOT)
-
 from core.cognitive_agent import CognitiveAgent
 from arc_prize_solvers import solve_identity, solve_uniform_mapping, solve_non_uniform, solve_non_uniform_improved
 from advanced_arc_solver import solve_with_advanced_methods

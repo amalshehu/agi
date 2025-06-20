@@ -21,11 +21,6 @@ import numpy as np
 from collections import Counter, deque
 from sklearn.cluster import KMeans
 
-# ---------------------------------------------------------------------
-# Ensure project root is in PYTHONPATH so core/ can be imported
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-# ---------------------------------------------------------------------
-
 # Toggle flags
 ENABLE_TRAINING = True
 

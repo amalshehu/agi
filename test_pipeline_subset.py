@@ -6,13 +6,10 @@ import json
 import numpy as np
 from collections import Counter
 
-# Add arc directory to path
-sys.path.append('arc')
-
 from arc_prize_pipeline import NeuroSymbolicARCSolver, TENSORFLOW_AVAILABLE
 
 def load_json(fn):
-    with open(os.path.join('arc/arc-prize-2025', fn), 'r') as f:
+    with open(os.path.join('arc-prize-2025', fn), 'r') as f:
         return json.load(f)
 
 def normalize_map(obj):

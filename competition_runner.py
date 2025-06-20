@@ -9,9 +9,6 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional
 
-import sys
-from pathlib import Path
-sys.path.append(str(Path(__file__).parent.parent))
 
 from data_loader import load_official_arc_data, ARCTask
 from model_loader import load_best_trained_agi
