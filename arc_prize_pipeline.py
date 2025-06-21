@@ -29,10 +29,19 @@ except Exception as e:
     TENSORFLOW_AVAILABLE = False
 
 DATA_DIR = 'arc-prize-2025'
+OUTPUT_DIR = 'output'
 
 def load_json(fn):
     with open(os.path.join(DATA_DIR, fn), 'r') as f:
         return json.load(f)
+
+
+def save_prediction(prefix: str, pid: str, inp: np.ndarray, pred: np.ndarray):
+    """Save input and predicted output as JSON under OUTPUT_DIR."""
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    out_path = os.path.join(OUTPUT_DIR, f"{prefix}_{pid}.json")
+    with open(out_path, "w") as f:
+        json.dump({"input": inp.tolist(), "output": pred.tolist()}, f)
 
 # Neuro-Symbolic Solver for Non-Uniform Puzzles
 class NeuroSymbolicARCSolver:
@@ -774,11 +783,14 @@ def main():
             continue
         inp = np.array(ch['train'][0]['input'])
         tgt = np.array(get_train_output(sol_map_tr[pid]), dtype=int)
+        solver_used = None
 
         if cat == 'identity':
             pred = solve_identity(ch, sol_map_tr[pid])
+            solver_used = 'identity'
         elif cat.startswith('uniform'):
             pred = solve_uniform_mapping(ch, sol_map_tr[pid])
+            solver_used = 'uniform'
         else:
             # Use NEURO-SYMBOLIC SOLVER for non-uniform puzzles
             debug_enabled = (cat == 'non-uniform' and debug_count < 20)  # Show more examples to test Phase 1
@@ -786,6 +798,7 @@ def main():
                 # Try NeuroSymbolic solver first if available
                 if neuro_solver is not None:
                     pred = neuro_solver.solve_puzzle(ch, sol_map_tr[pid], debug=debug_enabled)
+                    solver_used = 'neuro'
                     if debug_enabled:
                         print(f"  NeuroSymbolic solver result for {pid}: shape {pred.shape}")
                 else:
@@ -797,21 +810,25 @@ def main():
                     # Initialize ULTIMATE solver without cost constraints
                     ultimate_solver = UltimateARCSolver(max_cost_per_task=10.0)
                     pred = ultimate_solver.solve_task(ch, debug=debug_enabled)
+                    solver_used = 'ultimate'
                 except Exception as e2:
                     if debug_enabled:
                         print(f"  Ultimate solver failed for {pid}: {e2}, falling back to hybrid solver")
                     try:
                         hybrid_solver = HybridARCSolver(max_cost_per_task=10.0)
                         pred = hybrid_solver.solve_task(ch, debug=debug_enabled)
+                        solver_used = 'hybrid'
                     except Exception as e3:
                         if debug_enabled:
                             print(f"  Hybrid solver failed for {pid}: {e3}, falling back to advanced solver")
                         try:
                             pred = solve_with_advanced_methods(ch, sol_map_tr[pid], debug=debug_enabled)
+                            solver_used = 'advanced'
                         except Exception as e4:
                             if debug_enabled:
                                 print(f"  Advanced solver failed for {pid}: {e4}, falling back to improved solver")
                             pred = solve_non_uniform_improved(ch, sol_map_tr[pid], debug=debug_enabled)
+                            solver_used = 'improved'
 
             if debug_enabled:
                 debug_count += 1
@@ -822,6 +839,7 @@ def main():
         ok = int(np.array_equal(pred, tgt))
         totals_improved[cat]  += 1
         results_improved[cat] += ok
+        save_prediction(solver_used or 'unknown', pid, inp, pred)
 
     for cat in totals_improved:
         print(f"  {cat}: {results_improved[cat]}/{totals_improved[cat]} = {results_improved[cat]/totals_improved[cat]:.2%}")
