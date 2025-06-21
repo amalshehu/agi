@@ -1,6 +1,6 @@
 # dual_pathway_system.py
 """
-🧠⚙️ ARC Prize 2025 - Dual-Pathway Neural-Symbolic System
+ARC Prize 2025 - Dual-Pathway Neural-Symbolic System
 Phase 1: Integration of neural pattern detection with symbolic reasoning
 """
 
@@ -463,7 +463,7 @@ class DualPathwaySystem:
 
 def test_dual_pathway_system():
     """Test the dual-pathway system"""
-    print("🧠⚙️ Testing Dual-Pathway Neural-Symbolic System...")
+    print("Testing Dual-Pathway Neural-Symbolic System...")
     
     # Create test examples
     # Example 1: Simple horizontal flip
@@ -508,11 +508,11 @@ def test_dual_pathway_system():
         print(f"  Extracted {len(symbolic['extracted_rules'])} rules")
         print(f"  Found {len(symbolic['applicable_rules'])} applicable rules")
     
-    print(f"\nIntegrated Recommendations:")
+    print("\nIntegrated Recommendations:")
     for i, rec in enumerate(analysis["integrated_solution"]["recommendations"][:3]):
         print(f"  {i+1}. {rec['transformation']} ({rec['source']}, conf: {rec['confidence']:.3f})")
     
-    print("\n✅ Dual-Pathway System Test Complete!")
+    print("\nDual-Pathway System Test Complete!")
 
 if __name__ == "__main__":
     test_dual_pathway_system()

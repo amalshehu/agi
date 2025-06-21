@@ -1631,7 +1631,7 @@ class EnsembleSolver:
         test_input = np.array(challenge['test'][0]['input'], dtype=int)
         
         if debug:
-            print(f"🧠 ARC Prize 2025 Solver: {len(train_examples)} examples, test {test_input.shape}")
+            print(f"ARC Prize 2025 Solver: {len(train_examples)} examples, test {test_input.shape}")
         
         # STAGE 1: Neural Pattern Recognition
         neural_patterns = self.neural_recognizer.recognize_patterns(train_examples)
@@ -1639,7 +1639,7 @@ class EnsembleSolver:
         # Check for cached solution
         if 'cached_solution' in neural_patterns:
             if debug:
-                print("✅ Found cached solution!")
+                print("Found cached solution")
             try:
                 result = neural_patterns['cached_solution'].execute(test_input)
                 return result
@@ -1650,14 +1650,14 @@ class EnsembleSolver:
         hierarchical_result = self.hierarchical_reasoner.solve_hierarchically(train_examples, test_input)
         if hierarchical_result is not None:
             if debug:
-                print("✅ Hierarchical solver succeeded!")
+                print("Hierarchical solver succeeded")
             return hierarchical_result
         
         # STAGE 3: Ultra-fast pattern matching
         result = self._try_quick_patterns(train_examples, test_input, debug)
         if result is not None:
             if debug:
-                print("✅ Quick pattern match!")
+                print("Quick pattern match")
             return result
         
         # STAGE 4: Massive parallel ensemble with beam search
@@ -1667,7 +1667,7 @@ class EnsembleSolver:
             best_candidate = self._neural_candidate_selection(candidates, train_examples, neural_patterns, debug)
             if best_candidate is not None:
                 if debug:
-                    print("✅ Advanced ensemble succeeded!")
+                    print("Advanced ensemble succeeded")
                 # Cache successful pattern
                 if hasattr(best_candidate, 'program'):
                     self.neural_recognizer.cache_successful_pattern(neural_patterns, best_candidate.program)
@@ -1677,7 +1677,7 @@ class EnsembleSolver:
         result = self._neural_guided_transforms(train_examples, test_input, neural_patterns, debug)
         if result is not None:
             if debug:
-                print("✅ Neural-guided transformation!")
+                print("Neural-guided transformation")
             return result
         
         # STAGE 6: Advanced spatial reasoning
@@ -2336,7 +2336,7 @@ class EnsembleSolver:
             candidate_scores.append(score)
             
             if debug:
-                print(f"🧮 Candidate {i}: score {score:.3f}, shape {candidate.shape}")
+                print(f"Candidate {i}: score {score:.3f}, shape {candidate.shape}")
         
         # Return highest scoring candidate
         best_idx = np.argmax(candidate_scores)

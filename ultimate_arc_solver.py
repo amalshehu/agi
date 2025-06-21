@@ -1,13 +1,13 @@
 # ultimate_arc_solver.py
 """
-🏆 ULTIMATE ARC PRIZE 2025 SOLVER 🏆
+ULTIMATE ARC PRIZE 2025 SOLVER
 Complete implementation with Azure OpenAI, LangChain, and advanced techniques
 
 Phases 1-4 Complete:
-- Neural-Symbolic Hybrid Architecture ✅
-- GPT-4 Hypothesis Generation ✅  
-- Adversarial Validation ✅
-- Meta-Learning Pipeline ✅
+- Neural-Symbolic Hybrid Architecture
+- GPT-4 Hypothesis Generation
+- Adversarial Validation
+- Meta-Learning Pipeline
 """
 
 import numpy as np
@@ -45,7 +45,7 @@ try:
     from dual_pathway_system import DualPathwaySystem, ProcessingDecision
     PHASE1_AVAILABLE = True
 except ImportError as e:
-    print(f"⚠️ Phase 1 components not available: {e}")
+    print(f"Phase 1 components not available: {e}")
     PHASE1_AVAILABLE = False
 
 # Configure Azure OpenAI
@@ -459,7 +459,7 @@ OUTPUT FORMAT (JSON):
             ]
             return hypotheses[:3]
         except Exception as e:
-            print(f"❌ LLM failed: {e}")
+            print(f"LLM failed: {e}")
             return []
     
     def _generate_enhanced_template_hypotheses(self, examples: List[Tuple[np.ndarray, np.ndarray]], 
@@ -832,7 +832,7 @@ class UltimateARCSolver:
         test_input = np.array(challenge['test'][0]['input'], dtype=int)
         
         if debug:
-            print(f"🚀 ULTIMATE ARC SOLVER: {len(train_examples)} examples, budget ${cost_tracker.max_cost:.2f}")
+            print(f"ULTIMATE ARC SOLVER: {len(train_examples)} examples, budget ${cost_tracker.max_cost:.2f}")
         
         # STAGE 0: Phase 1 Dual-Pathway Analysis (if available)
         if self.dual_pathway_system and PHASE1_AVAILABLE:
@@ -840,7 +840,7 @@ class UltimateARCSolver:
             
             try:
                 if debug:
-                    print("🧠 Phase 1: Dual-pathway analysis...")
+                    print("Phase 1: Dual-pathway analysis...")
                 
                 phase1_result = self._phase1_solve(train_examples, test_input, cost_tracker, debug)
                 
@@ -851,14 +851,14 @@ class UltimateARCSolver:
                                        0.5, solve_time, "phase1")
                     
                     if debug:
-                        print(f"✅ Phase 1 SUCCESS! Time: {solve_time:.2f}s")
-                        print(f"📊 Phase 1 rate: {self.phase1_success_count}/{self.phase1_attempt_count} = {self.phase1_success_count/self.phase1_attempt_count:.1%}")
+                        print(f"Phase 1 SUCCESS! Time: {solve_time:.2f}s")
+                        print(f"Phase 1 rate: {self.phase1_success_count}/{self.phase1_attempt_count} = {self.phase1_success_count/self.phase1_attempt_count:.1%}")
                     
                     return phase1_result
                     
             except Exception as e:
                 if debug:
-                    print(f"⚠️ Phase 1 failed: {e}")
+                    print(f"Phase 1 failed: {e}")
         
         # STAGE 1: Meta-learning lookup
         complexity = self.hybrid_solver._estimate_complexity(train_examples, test_input)
@@ -866,7 +866,7 @@ class UltimateARCSolver:
         
         if cached_rule:
             if debug:
-                print(f"💾 Found cached solution: {cached_rule}")
+                print(f"Found cached solution: {cached_rule}")
             
             if self.rule_verifier.verify_rule(cached_rule, train_examples, cost_tracker):
                 result = self.rule_verifier._execute_rule(cached_rule, test_input)
@@ -875,17 +875,17 @@ class UltimateARCSolver:
                     self._record_success(train_examples, cached_rule, cost_tracker.current_cost, 
                                        complexity, solve_time, "meta_cache")
                     if debug:
-                        print(f"✅ Cached solution succeeded! Time: {solve_time:.2f}s")
+                        print(f"Cached solution succeeded! Time: {solve_time:.2f}s")
                     return result
         
         # STAGE 2: Fast hypothesis generation and execution
-        print("🧠 Generating advanced hypotheses...")
+        print("Generating advanced hypotheses...")
         hypotheses = self.hypothesis_generator.generate_hypotheses(
             train_examples, cost_tracker, max_hypotheses=3
         )
         
         if debug and hypotheses:
-            print(f"🧠 Generated {len(hypotheses)} advanced hypotheses")
+            print(f"Generated {len(hypotheses)} advanced hypotheses")
             for i, hyp in enumerate(hypotheses):
                 print(f"  {i+1}. {hyp['rule']} (confidence: {hyp['confidence']:.2f})")
         
@@ -895,7 +895,7 @@ class UltimateARCSolver:
             
             # Try direct execution first (fast path)
             if debug:
-                print(f"🚀 Fast execution attempt: {rule}")
+                print(f"Fast execution attempt: {rule}")
             
             try:
                 result = self._fast_execute_rule(rule, test_input, debug)
@@ -905,20 +905,20 @@ class UltimateARCSolver:
                                        complexity, solve_time, hypothesis['source'])
                     
                     if debug:
-                        print(f"✅ Fast execution succeeded: {rule}")
+                        print(f"Fast execution succeeded: {rule}")
                         print(f"   Time: {solve_time:.2f}s")
                     return result
                 else:
                     if debug:
-                        print(f"❌ Fast execution failed: {rule}")
+                        print(f"Fast execution failed: {rule}")
             except Exception as e:
                 if debug:
-                    print(f"❌ Fast execution error: {e}")
+                    print(f"Fast execution error: {e}")
                 continue
         
         # STAGE 3b: Traditional verification for remaining hypotheses (if needed)
         if debug:
-            print("🔄 Trying traditional hypothesis verification...")
+            print("Trying traditional hypothesis verification...")
         
         for hypothesis in sorted(hypotheses, key=lambda h: h['confidence'], reverse=True):
             rule = hypothesis['rule']
@@ -939,7 +939,7 @@ class UltimateARCSolver:
                             )
                             
                             if debug:
-                                print(f"✅ Traditional verification succeeded: {rule}")
+                                print(f"Traditional verification succeeded: {rule}")
                                 print(f"   Cost: ${cost_tracker.current_cost:.2f}, Time: {solve_time:.2f}s")
                             return result
                     else:
@@ -947,7 +947,7 @@ class UltimateARCSolver:
                         self.meta_learning.update_failure(train_examples, rule)
                 except Exception as e:
                     if debug:
-                        print(f"❌ Traditional verification failed: {e}")
+                        print(f"Traditional verification failed: {e}")
                     continue
         
         # STAGE 4: Fallback to hybrid solver
@@ -961,7 +961,7 @@ class UltimateARCSolver:
                            complexity, solve_time, result is not None)
         
         if debug:
-            print(f"⚠️ Hybrid fallback complete. Time: {solve_time:.2f}s")
+            print(f"Hybrid fallback complete. Time: {solve_time:.2f}s")
         
         return result
     
@@ -1041,7 +1041,7 @@ class UltimateARCSolver:
             results["avg_time"] = total_time / results["total_puzzles"]
         
         # Print summary
-        print(f"🎯 Adversarial Validation Results:")
+        print("Adversarial Validation Results:")
         print(f"   Success Rate: {results['success_rate']:.1%} ({results['solved']}/{results['total_puzzles']})")
         print(f"   Average Time: {results['avg_time']:.2f}s")
         print(f"   By Type:")
@@ -1067,7 +1067,7 @@ class UltimateARCSolver:
             if debug:
                 decision = analysis.get("pathway_decision")
                 if decision:
-                    print(f"🧠 Pathway: {decision.primary_pathway} (confidence: {decision.confidence:.3f})")
+                    print(f"Pathway: {decision.primary_pathway} (confidence: {decision.confidence:.3f})")
             
             # Apply Phase 1 solutions
             integrated_solution = analysis.get("integrated_solution", {})
@@ -1080,7 +1080,7 @@ class UltimateARCSolver:
             for i, rec in enumerate(recommendations[:2]):  # Try top 2
                 try:
                     if debug:
-                        print(f"🔍 Trying Phase 1 rec {i+1}: {rec.get('transformation', 'unknown')} ({rec.get('source', 'unknown')})")
+                        print(f"Trying Phase 1 rec {i+1}: {rec.get('transformation', 'unknown')} ({rec.get('source', 'unknown')})")
                     
                     result = self._execute_phase1_transformation(rec, test_input, debug)
                     if result is not None:
@@ -1088,14 +1088,14 @@ class UltimateARCSolver:
                         
                 except Exception as e:
                     if debug:
-                        print(f"❌ Phase 1 rec {i+1} failed: {e}")
+                        print(f"Phase 1 rec {i+1} failed: {e}")
                     continue
             
             return None
             
         except Exception as e:
             if debug:
-                print(f"❌ Phase 1 analysis failed: {e}")
+                print(f"Phase 1 analysis failed: {e}")
             return None
     
     def _execute_phase1_transformation(self, recommendation: Dict[str, Any], 
@@ -1116,7 +1116,7 @@ class UltimateARCSolver:
         """Execute neural pathway transformation"""
         
         if debug:
-            print(f"🧠 Executing neural: {transformation}")
+            print(f"Executing neural: {transformation}")
         
         if transformation == "flip_horizontal":
             return np.fliplr(test_input)
@@ -1142,7 +1142,7 @@ class UltimateARCSolver:
             return test_input.copy()
         else:
             if debug:
-                print(f"❌ Unknown neural transformation: {transformation}")
+                print(f"Unknown neural transformation: {transformation}")
             return None
     
     def _execute_symbolic_transform(self, transformation: List[str], test_input: np.ndarray, debug: bool = False) -> Optional[np.ndarray]:
@@ -1157,7 +1157,7 @@ class UltimateARCSolver:
         # Apply transformations sequentially
         for action in transformation:
             if debug:
-                print(f"🔧 Applying symbolic action: {action}")
+                print(f"Applying symbolic action: {action}")
                 
             if "recolor" in action:
                 # Handle recolor operations: recolor(src -> dst)
@@ -1168,12 +1168,12 @@ class UltimateARCSolver:
                     dst_color = int(recolor_match.group(2))
                     result = np.where(result == src_color, dst_color, result)
                     if debug:
-                        print(f"✅ Recolored {src_color} -> {dst_color}")
+                        print(f"Recolored {src_color} -> {dst_color}")
                         
             elif "maintain_all_properties" in action:
                 # Identity operation - keep the grid as is
                 if debug:
-                    print(f"✅ Maintaining all properties (identity)")
+                    print(f"Maintaining all properties (identity)")
                 pass  # result stays the same
                 
             elif "translate" in action:
@@ -1196,29 +1196,29 @@ class UltimateARCSolver:
                                     new_result[new_r, new_c] = result[r, c]
                     result = new_result
                     if debug:
-                        print(f"✅ Translated by dx={dx}, dy={dy}")
+                        print(f"Translated by dx={dx}, dy={dy}")
                     
             elif "flip_horizontal" in action:
                 result = np.fliplr(result)
                 if debug:
-                    print(f"✅ Flipped horizontally")
+                    print("Flipped horizontally")
             elif "flip_vertical" in action:
                 result = np.flipud(result)
                 if debug:
-                    print(f"✅ Flipped vertically")
+                    print("Flipped vertically")
             elif "rotate" in action:
                 if "90" in action:
                     result = np.rot90(result, k=1)
                     if debug:
-                        print(f"✅ Rotated 90°")
+                        print("Rotated 90°")
                 elif "180" in action:
                     result = np.rot90(result, k=2)
                     if debug:
-                        print(f"✅ Rotated 180°")
+                        print("Rotated 180°")
                 elif "270" in action:
                     result = np.rot90(result, k=3)
                     if debug:
-                        print(f"✅ Rotated 270°")
+                        print("Rotated 270°")
             elif "scale_uniform" in action:
                 # Extract scale factor
                 scale_match = re.search(r'scale_uniform\((\d+)\)', action)
@@ -1226,13 +1226,13 @@ class UltimateARCSolver:
                     scale = int(scale_match.group(1))
                     result = np.repeat(np.repeat(result, scale, axis=0), scale, axis=1)
                     if debug:
-                        print(f"✅ Scaled uniformly by {scale}x")
+                        print(f"Scaled uniformly by {scale}x")
             else:
                 if debug:
-                    print(f"❌ Unknown symbolic action: {action}")
+                    print(f"Unknown symbolic action: {action}")
                     
         if debug:
-            print(f"🏁 Final result shape: {result.shape}")
+            print(f"Final result shape: {result.shape}")
         
         return result
     
@@ -1283,7 +1283,7 @@ class UltimateARCSolver:
         """Fast execution of simple rules without full verification"""
         
         if debug:
-            print(f"⚡ Fast executing: {rule}")
+            print(f"Fast executing: {rule}")
         
         # Handle common transformation patterns
         if "FLIP(" in rule:
@@ -1438,7 +1438,7 @@ class UltimateARCSolver:
 def test_ultimate_solver():
     """Test the ultimate solver."""
     
-    print("🚀 Testing Ultimate ARC Solver...")
+    print("Testing Ultimate ARC Solver...")
     
     # Test with simple example
     test_challenge = {

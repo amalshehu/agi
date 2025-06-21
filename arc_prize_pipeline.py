@@ -9,6 +9,7 @@ from arc_prize_solvers import solve_identity, solve_uniform_mapping, solve_non_u
 from advanced_arc_solver import solve_with_advanced_methods
 from hybrid_arc_solver import HybridARCSolver
 from ultimate_arc_solver import UltimateARCSolver
+from visualization import visualize_example
 
 # Import neuro-symbolic components (optional)
 try:
@@ -711,6 +712,7 @@ async def train_agent_on_identity(ch_map, sol_map, cat_map, epochs=5):
     return agent
 
 def main():
+    visualize = '--visualize' in sys.argv
     # Unzip if needed
     if not os.path.isdir(DATA_DIR):
         with zipfile.ZipFile('arc-prize-2025.zip', 'r') as z:
@@ -785,35 +787,37 @@ def main():
                 if neuro_solver is not None:
                     pred = neuro_solver.solve_puzzle(ch, sol_map_tr[pid], debug=debug_enabled)
                     if debug_enabled:
-                        print(f"  🧠 NeuroSymbolic solver result for {pid}: shape {pred.shape}")
+                        print(f"  NeuroSymbolic solver result for {pid}: shape {pred.shape}")
                 else:
                     raise Exception("NeuroSymbolic solver not available")
             except Exception as e:
                 if debug_enabled:
-                    print(f"  🚨 NeuroSymbolic solver failed for {pid}: {e}, falling back to ultimate solver")
+                    print(f"  NeuroSymbolic solver failed for {pid}: {e}, falling back to ultimate solver")
                 try:
                     # Initialize ULTIMATE solver without cost constraints
                     ultimate_solver = UltimateARCSolver(max_cost_per_task=10.0)
                     pred = ultimate_solver.solve_task(ch, debug=debug_enabled)
                 except Exception as e2:
                     if debug_enabled:
-                        print(f"  🚨 Ultimate solver failed for {pid}: {e2}, falling back to hybrid solver")
+                        print(f"  Ultimate solver failed for {pid}: {e2}, falling back to hybrid solver")
                     try:
                         hybrid_solver = HybridARCSolver(max_cost_per_task=10.0)
                         pred = hybrid_solver.solve_task(ch, debug=debug_enabled)
                     except Exception as e3:
                         if debug_enabled:
-                            print(f"  🚨 Hybrid solver failed for {pid}: {e3}, falling back to advanced solver")
+                            print(f"  Hybrid solver failed for {pid}: {e3}, falling back to advanced solver")
                         try:
                             pred = solve_with_advanced_methods(ch, sol_map_tr[pid], debug=debug_enabled)
                         except Exception as e4:
                             if debug_enabled:
-                                print(f"  🚨 Advanced solver failed for {pid}: {e4}, falling back to improved solver")
+                                print(f"  Advanced solver failed for {pid}: {e4}, falling back to improved solver")
                             pred = solve_non_uniform_improved(ch, sol_map_tr[pid], debug=debug_enabled)
-            
+
             if debug_enabled:
                 debug_count += 1
-                print(f"  ✅ Sample puzzle {pid}: prediction shape {pred.shape}, target shape {tgt.shape}")
+                print(f"  Sample puzzle {pid}: prediction shape {pred.shape}, target shape {tgt.shape}")
+                if visualize:
+                    visualize_example(inp, tgt, pred)
 
         ok = int(np.array_equal(pred, tgt))
         totals_improved[cat]  += 1
