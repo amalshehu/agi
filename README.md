@@ -7,7 +7,6 @@ rule based solvers with a few lightweight neural components.  It is **not** a ge
 
 - `core/` – contains the `CognitiveAgent` used by the solvers
 - `arc_prize_pipeline.py` – helper for running solvers on ARC tasks
-- `test_*` – small scripts demonstrating solver behaviour
 
 ## Getting started
 
