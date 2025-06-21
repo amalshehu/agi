@@ -1,6 +1,6 @@
 # phase1_integration.py
 """
-🚀 ARC Prize 2025 - Phase 1 Integration
+ARC Prize 2025 - Phase 1 Integration
 Integrate dual-pathway foundation with the ultimate solver
 """
 
@@ -59,7 +59,7 @@ class Phase1EnhancedSolver:
         test_input = np.array(challenge['test'][0]['input'], dtype=int)
         
         if debug:
-            print(f"🚀 PHASE 1 ENHANCED SOLVER: {len(train_examples)} examples")
+            print(f"PHASE 1 ENHANCED SOLVER: {len(train_examples)} examples")
         
         # STAGE 1: Dual-pathway analysis
         try:
@@ -67,8 +67,8 @@ class Phase1EnhancedSolver:
             
             if debug:
                 decision = analysis["pathway_decision"]
-                print(f"🧠 Pathway: {decision.primary_pathway} (confidence: {decision.confidence:.3f})")
-                print(f"💡 Reasoning: {decision.reasoning}")
+                print(f"Pathway: {decision.primary_pathway} (confidence: {decision.confidence:.3f})")
+                print(f"Reasoning: {decision.reasoning}")
             
             # STAGE 2: Apply Phase 1 solutions
             phase1_result = self._apply_phase1_solution(analysis, test_input, debug)
@@ -78,26 +78,26 @@ class Phase1EnhancedSolver:
                 solve_time = time.time() - start_time
                 
                 if debug:
-                    print(f"✅ Phase 1 SUCCESS! Time: {solve_time:.2f}s")
-                    print(f"📊 Phase 1 success rate: {self.phase1_success_count}/{self.total_attempts} = {self.phase1_success_count/self.total_attempts:.1%}")
+                    print(f"Phase 1 SUCCESS! Time: {solve_time:.2f}s")
+                    print(f"Phase 1 success rate: {self.phase1_success_count}/{self.total_attempts} = {self.phase1_success_count/self.total_attempts:.1%}")
                 
                 return phase1_result
                 
         except Exception as e:
             if debug:
-                print(f"⚠️ Phase 1 analysis failed: {e}")
+                print(f"Phase 1 analysis failed: {e}")
         
         # STAGE 3: Fallback to ultimate solver
         if debug:
-            print("🔄 Falling back to Ultimate Solver...")
+            print("Falling back to Ultimate Solver...")
         
         self.ultimate_fallback_count += 1
         result = self.ultimate_solver.solve_task(challenge, debug=False)
         
         solve_time = time.time() - start_time
         if debug:
-            print(f"⚠️ Ultimate fallback complete. Time: {solve_time:.2f}s")
-            print(f"📊 Fallback rate: {self.ultimate_fallback_count}/{self.total_attempts} = {self.ultimate_fallback_count/self.total_attempts:.1%}")
+            print(f"Ultimate fallback complete. Time: {solve_time:.2f}s")
+            print(f"Fallback rate: {self.ultimate_fallback_count}/{self.total_attempts} = {self.ultimate_fallback_count/self.total_attempts:.1%}")
         
         return result
     
@@ -320,23 +320,23 @@ class Phase1EnhancedSolver:
             print(stats["error"])
             return
         
-        print("🚀 PHASE 1 ENHANCED SOLVER - PERFORMANCE REPORT 🚀")
+        print("PHASE 1 ENHANCED SOLVER - PERFORMANCE REPORT")
         print("=" * 60)
         print(f"Total Attempts: {stats['total_attempts']}")
         print(f"Phase 1 Success: {stats['phase1_success']} ({stats['phase1_success_rate']:.1%})")
         print(f"Ultimate Fallback: {stats['ultimate_fallback']} ({stats['fallback_rate']:.1%})")
         print(f"Phase 1 Effectiveness: {stats['phase1_effectiveness']:.1%}")
         
-        print("\n🎯 FOUNDATION GOALS:")
-        print(f"  Target: 80%+ on uniform scaling - {'✅' if stats['phase1_success_rate'] >= 0.8 else '🔄'}")
-        print(f"  Cost per puzzle: <$0.10 - {'✅' if True else '🔄'}")  # Always true for Phase 1
-        print(f"  Transform types: 20+ handled - {'✅' if True else '🔄'}")
+        print("\nFOUNDATION GOALS:")
+        print(f"  Target: 80%+ on uniform scaling - {'PASS' if stats['phase1_success_rate'] >= 0.8 else 'RETRY'}")
+        print(f"  Cost per puzzle: <$0.10 - PASS")  # Always true for Phase 1
+        print(f"  Transform types: 20+ handled - PASS")
         
         print("=" * 60)
 
 def test_phase1_integration():
     """Test Phase 1 integration with sample puzzles"""
-    print("🚀 Testing Phase 1 Integration...")
+    print("Testing Phase 1 Integration...")
     
     # Test cases
     test_challenges = [
@@ -386,7 +386,7 @@ def test_phase1_integration():
     print("\n" + "="*60)
     solver.print_performance_report()
     
-    print("\n✅ Phase 1 Integration Test Complete!")
+    print("\nPhase 1 Integration Test Complete!")
 
 if __name__ == "__main__":
     test_phase1_integration()

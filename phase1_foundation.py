@@ -1,6 +1,6 @@
 # phase1_foundation.py
 """
-🚀 ARC Prize 2025 - Phase 1: Foundation Setup
+ARC Prize 2025 - Phase 1: Foundation Setup
 Human-like abstraction engine with dual-pathway architecture
 """
 
@@ -453,7 +453,7 @@ class ObjectTypeClassifier:
 
 def test_phase1_foundation():
     """Test the Phase 1 foundation components"""
-    print("🚀 Testing Phase 1 Foundation Components...")
+    print("Testing Phase 1 Foundation Components...")
     
     # Test with simple examples
     test_grids = [
@@ -493,7 +493,7 @@ def test_phase1_foundation():
             print(f"    Compactness: {obj.compactness:.3f}")
             print(f"    Center: ({obj.center[0]:.1f}, {obj.center[1]:.1f})")
     
-    print("\n✅ Phase 1 Foundation Test Complete!")
+    print("\nPhase 1 Foundation Test Complete!")
 
 if __name__ == "__main__":
     test_phase1_foundation()

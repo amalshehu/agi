@@ -499,13 +499,13 @@ class HybridARCSolver:
         test_input = np.array(challenge['test'][0]['input'], dtype=int)
         
         if debug:
-            print(f"🎯 Hybrid ARC Solver: {len(train_examples)} examples, budget ${cost_tracker.max_cost:.2f}")
+            print(f"Hybrid ARC Solver: {len(train_examples)} examples, budget ${cost_tracker.max_cost:.2f}")
         
         # STAGE 1: Complexity-based routing
         complexity = self._estimate_complexity(train_examples, test_input)
         
         if debug:
-            print(f"📊 Task complexity: {complexity:.3f}")
+            print(f"Task complexity: {complexity:.3f}")
         
         # STAGE 2: Route to appropriate solver
         if complexity < 0.3 and cost_tracker.can_afford('symbolic_solve'):
@@ -513,7 +513,7 @@ class HybridARCSolver:
             result = self._symbolic_solve(train_examples, test_input, cost_tracker, debug)
             if result is not None:
                 if debug:
-                    print(f"✅ Symbolic solver succeeded! Cost: ${cost_tracker.current_cost:.2f}")
+                    print(f"Symbolic solver succeeded! Cost: ${cost_tracker.current_cost:.2f}")
                 return result
         
         # STAGE 3: Advanced hybrid approach for complex tasks
@@ -521,12 +521,12 @@ class HybridARCSolver:
         
         if result is not None:
             if debug:
-                print(f"✅ Hybrid solver succeeded! Cost: ${cost_tracker.current_cost:.2f}")
+                print(f"Hybrid solver succeeded! Cost: ${cost_tracker.current_cost:.2f}")
             return result
         
         # STAGE 4: Emergency fallback
         if debug:
-            print(f"⚠️ Using fallback, cost: ${cost_tracker.current_cost:.2f}")
+            print(f"Using fallback, cost: ${cost_tracker.current_cost:.2f}")
         
         return self._emergency_fallback(train_examples, test_input)
     
@@ -613,7 +613,7 @@ class HybridARCSolver:
         for name, transform in simple_transforms:
             if self._test_transform(transform, examples):
                 if debug:
-                    print(f"🔧 Applied simple transform: {name}")
+                    print(f"Applied simple transform: {name}")
                 return transform(test_input)
         
         # Try simple scaling
@@ -632,7 +632,7 @@ class HybridARCSolver:
                     
                     if self._test_transform(scale_transform, examples):
                         if debug:
-                            print(f"🔧 Applied scaling: {scale_h}x")
+                            print(f"Applied scaling: {scale_h}x")
                         return scale_transform(test_input)
         
         return None
@@ -659,7 +659,7 @@ class HybridARCSolver:
             neural_patterns = self.neural_recognizer.recognize_patterns(examples)
             
             if debug:
-                print(f"🧠 Neural analysis: {neural_patterns['transformation_type']}")
+                print(f"Neural analysis: {neural_patterns['transformation_type']}")
         else:
             neural_patterns = {'transformation_type': 'unknown'}
         
@@ -669,7 +669,7 @@ class HybridARCSolver:
         )
         
         if debug and hypotheses:
-            print(f"💡 Generated {len(hypotheses)} hypotheses")
+            print(f"Generated {len(hypotheses)} hypotheses")
         
         # Verify and execute hypotheses
         for i, hypothesis in enumerate(hypotheses):
@@ -677,7 +677,7 @@ class HybridARCSolver:
                 result = self.rule_verifier._execute_rule(hypothesis, test_input)
                 if result is not None:
                     if debug:
-                        print(f"✅ Hypothesis {i+1} succeeded: {hypothesis}")
+                        print(f"Hypothesis {i+1} succeeded: {hypothesis}")
                     return result
         
         # Fallback to advanced techniques if budget allows
@@ -688,7 +688,7 @@ class HybridARCSolver:
             result = self.hierarchical_reasoner.solve_hierarchically(examples, test_input)
             if result is not None:
                 if debug:
-                    print("✅ Hierarchical reasoning succeeded")
+                    print("Hierarchical reasoning succeeded")
                 return result
             
             # Try program synthesis with limited search
@@ -697,7 +697,7 @@ class HybridARCSolver:
                 try:
                     result = program.execute(test_input)
                     if debug:
-                        print(f"✅ Program synthesis: {program.description()}")
+                        print(f"Program synthesis: {program.description()}")
                     return result
                 except:
                     pass
@@ -749,5 +749,5 @@ def test_hybrid_solver():
     return result
 
 if __name__ == "__main__":
-    print("🚀 Testing Hybrid ARC Solver...")
+    print("Testing Hybrid ARC Solver...")
     test_hybrid_solver()

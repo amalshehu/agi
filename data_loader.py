@@ -43,9 +43,9 @@ class OfficialARCLoader:
         eval_tasks = self._convert_to_tasks(eval_challenges, eval_solutions)
         test_tasks = self._convert_to_tasks(test_challenges, {})  # No solutions for test
         
-        print(f"✅ Loaded {len(train_tasks)} training tasks")
-        print(f"✅ Loaded {len(eval_tasks)} evaluation tasks") 
-        print(f"✅ Loaded {len(test_tasks)} test tasks")
+        print(f"Loaded {len(train_tasks)} training tasks")
+        print(f"Loaded {len(eval_tasks)} evaluation tasks")
+        print(f"Loaded {len(test_tasks)} test tasks")
         
         return train_tasks, eval_tasks, test_tasks
     
@@ -112,7 +112,7 @@ if __name__ == "__main__":
     try:
         train_tasks, eval_tasks, test_tasks = load_official_arc_data()
         
-        print(f"\n📊 Dataset Summary:")
+        print("\nDataset Summary:")
         print(f"Training: {len(train_tasks)} tasks")
         print(f"Evaluation: {len(eval_tasks)} tasks") 
         print(f"Test: {len(test_tasks)} tasks")
@@ -120,7 +120,7 @@ if __name__ == "__main__":
         # Show first task details
         if train_tasks:
             first_task = train_tasks[0]
-            print(f"\n🔍 First training task: {first_task.id}")
+            print(f"\nFirst training task: {first_task.id}")
             print(f"Training examples: {len(first_task.train)}")
             print(f"Test cases: {len(first_task.test)}")
             
@@ -131,5 +131,5 @@ if __name__ == "__main__":
                 print(f"Example output shape: {output_shape}")
         
     except Exception as e:
-        print(f"❌ Error loading data: {e}")
+        print(f"Error loading data: {e}")
         print("Make sure the arc-prize-2025 directory contains the official data files")

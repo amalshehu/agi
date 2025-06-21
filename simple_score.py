@@ -7,7 +7,7 @@ from data_loader import load_official_arc_data
 
 def score_submission(submission_file: str):
     """Score submission against evaluation set"""
-    print(f"📊 Scoring: {submission_file}")
+    print(f"Scoring: {submission_file}")
     
     # Load our official data
     train_set, eval_set, test_set = load_official_arc_data()
@@ -58,20 +58,20 @@ def score_submission(submission_file: str):
                 task_score = task_correct / task_total
                 task_scores.append(task_score)
                 if task_score > 0:
-                    print(f"✅ Task {task.id}: {task_score:.2f} ({task_correct}/{task_total})")
+                    print(f"Task {task.id}: {task_score:.2f} ({task_correct}/{task_total})")
     
     # Overall score
     if total_predictions > 0:
         overall_score = correct_predictions / total_predictions
-        print(f"\n🎯 Overall Score: {overall_score:.3f} ({correct_predictions}/{total_predictions})")
+        print(f"\nOverall Score: {overall_score:.3f} ({correct_predictions}/{total_predictions})")
     else:
-        print("❌ No valid predictions found")
+        print("No valid predictions found")
     
     # Task-level stats
     if task_scores:
         solved_tasks = sum(1 for s in task_scores if s == 1.0)
-        print(f"📊 Perfectly solved tasks: {solved_tasks}/{len(task_scores)}")
-        print(f"📊 Average task score: {np.mean(task_scores):.3f}")
+        print(f"Perfectly solved tasks: {solved_tasks}/{len(task_scores)}")
+        print(f"Average task score: {np.mean(task_scores):.3f}")
     
     return overall_score if total_predictions > 0 else 0.0
 
@@ -88,10 +88,10 @@ if __name__ == "__main__":
         eval_results = glob.glob("evaluation_results*.json")
         if eval_results:
             latest = max(eval_results, key=lambda x: Path(x).stat().st_mtime)
-            print(f"\n📋 Scoring evaluation results: {latest}")
+            print(f"\nScoring evaluation results: {latest}")
             score = score_submission(latest)
         else:
-            print("❌ No evaluation results found")
+            print("No evaluation results found")
             print("Available files:")
             for f in glob.glob("*.json"):
                 print(f"  {f}")
