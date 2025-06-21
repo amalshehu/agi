@@ -12,3 +12,16 @@ def visualize_example(input_grid: np.ndarray, target_grid: np.ndarray, predicted
         ax.axis("off")
     plt.tight_layout()
     plt.show()
+
+
+def save_visualization(input_grid: np.ndarray, target_grid: np.ndarray, predicted_grid: np.ndarray, path: str) -> None:
+    """Save a visualization of input, target and predicted grids to the given path."""
+    fig, axes = plt.subplots(1, 3, figsize=(9, 3))
+    for ax, grid, title in zip(axes, [input_grid, target_grid, predicted_grid],
+                               ["Input", "Target", "Prediction"]):
+        ax.imshow(grid, interpolation="nearest", cmap="tab20")
+        ax.set_title(title)
+        ax.axis("off")
+    plt.tight_layout()
+    plt.savefig(path)
+    plt.close(fig)

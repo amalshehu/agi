@@ -13,6 +13,9 @@ rule based solvers with a few lightweight neural components.  It is **not** a ge
 
 1. Ensure the `arc-prize-2025` data directory is present in the repository root.
 2. Use `python arc_prize_pipeline.py` to run the solver pipeline.
+   Pass `--save-images` to store a PNG visualization for each puzzle under
+   `output/images`. The optional `--visualize` flag will also display
+   examples while running if a display is available.
 
 The code is a research prototype and many components are simplified.
 

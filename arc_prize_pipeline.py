@@ -9,7 +9,7 @@ from arc_prize_solvers import solve_identity, solve_uniform_mapping, solve_non_u
 from advanced_arc_solver import solve_with_advanced_methods
 from hybrid_arc_solver import HybridARCSolver
 from ultimate_arc_solver import UltimateARCSolver
-from visualization import visualize_example
+from visualization import visualize_example, save_visualization
 
 # Import neuro-symbolic components (optional)
 try:
@@ -30,18 +30,26 @@ except Exception as e:
 
 DATA_DIR = 'arc-prize-2025'
 OUTPUT_DIR = 'output'
+IMAGES_DIR = os.path.join(OUTPUT_DIR, 'images')
 
 def load_json(fn):
     with open(os.path.join(DATA_DIR, fn), 'r') as f:
         return json.load(f)
 
 
-def save_prediction(prefix: str, pid: str, inp: np.ndarray, pred: np.ndarray):
-    """Save input and predicted output as JSON under OUTPUT_DIR."""
+def save_prediction(prefix: str, pid: str, inp: np.ndarray, target: np.ndarray, pred: np.ndarray, save_image: bool = False):
+    """Save input and predicted output as JSON under OUTPUT_DIR.
+
+    If ``save_image`` is True, also save a PNG visualization under IMAGES_DIR.
+    """
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     out_path = os.path.join(OUTPUT_DIR, f"{prefix}_{pid}.json")
     with open(out_path, "w") as f:
         json.dump({"input": inp.tolist(), "output": pred.tolist()}, f)
+    if save_image:
+        os.makedirs(IMAGES_DIR, exist_ok=True)
+        img_path = os.path.join(IMAGES_DIR, f"{prefix}_{pid}.png")
+        save_visualization(inp, target, pred, img_path)
 
 # Neuro-Symbolic Solver for Non-Uniform Puzzles
 class NeuroSymbolicARCSolver:
@@ -722,6 +730,7 @@ async def train_agent_on_identity(ch_map, sol_map, cat_map, epochs=5):
 
 def main():
     visualize = '--visualize' in sys.argv
+    save_images = '--save-images' in sys.argv
     # Unzip if needed
     if not os.path.isdir(DATA_DIR):
         with zipfile.ZipFile('arc-prize-2025.zip', 'r') as z:
@@ -839,7 +848,7 @@ def main():
         ok = int(np.array_equal(pred, tgt))
         totals_improved[cat]  += 1
         results_improved[cat] += ok
-        save_prediction(solver_used or 'unknown', pid, inp, pred)
+        save_prediction(solver_used or 'unknown', pid, inp, tgt, pred, save_images)
 
     for cat in totals_improved:
         print(f"  {cat}: {results_improved[cat]}/{totals_improved[cat]} = {results_improved[cat]/totals_improved[cat]:.2%}")
